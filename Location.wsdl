@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<wsdl:definitions
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="efood.service.location"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:user_schema="efood.schema.location"
+	name="LocationService"
+	targetNamespace="efood.service.location">
+	<wsdl:types>
+		<xs:schema>
+			<xs:import schemaLocation="location.xsd" namespace="efood.schema.location"></xs:import>
+			
+		<!--<xs:import schemaLocation="member.xsd" namespace="efood.schema.member"></xs:import>-->
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getLocation">
+		<wsdl:part name="locationMessage" element="user_schema:locationMessage"></wsdl:part>
+		
+
+	</wsdl:message>
+	
+    <wsdl:message name="showLocation">
+		<wsdl:part name="message" element="user_schema:locationMessage"></wsdl:part>
+		
+
+	</wsdl:message>
+
+	<wsdl:portType name="UserPortType">
+		<!-- The 'UserInformation' function will take id,name and age as input and will return user id. -->
+		<wsdl:operation name="locationInformation">
+			<wsdl:input message="tns:getLocation" name="getLocation"></wsdl:input>
+			<wsdl:output message="tns:showLocation" name="showLocation"></wsdl:output>
+			
+		</wsdl:operation>
+
+
+	</wsdl:portType>
+
+
+
+	<wsdl:binding name="LocationService" type="tns:UserPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="locationInformation">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="getLocation">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="showLocation">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+	</wsdl:binding>
+
+	<wsdl:service name="Location">
+		<wsdl:port binding="tns:LocationService" name="ShowLocationInformationPort">
+			<soap:address location="http://localhost:8080/show/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
